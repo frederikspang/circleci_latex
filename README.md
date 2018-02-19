@@ -8,7 +8,7 @@
 jobs:
   build:
     docker:
-      - image: frederikspang/latex_docker:0.2
+      - image: frederikspang/latex_docker:0.3
     steps:
       - checkout
       - run: cp .latexmkrc ~/.latexmkrc
