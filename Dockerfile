@@ -10,6 +10,7 @@ RUN set -ex \
     libgdbm-dev \
     lmodern \
     texlive \
+    texlive-fonts-recommended \
     texlive-lang-english \
     texlive-lang-european \
     texlive-latex-extra \
