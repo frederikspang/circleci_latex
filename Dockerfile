@@ -1,11 +1,12 @@
 FROM buildpack-deps:xenial
 
 LABEL maintainer="frederik@progras.dk"
-LABEL version="0.3"
+LABEL version="0.5"
 
 RUN set -ex \
   \
   && buildDeps=' \
+    xzdec \
     bison \
     libgdbm-dev \
     lmodern \
@@ -26,6 +27,12 @@ RUN set -ex \
   && apt-get update \
   && apt-get install -y --no-install-recommends $buildDeps \
   && rm -rf /var/lib/apt/lists/* \
-  && apt-get clean \
-  && pip install --upgrade pip \
+  && apt-get clean
+
+RUN tlmgr init-usertree; exit 0
+RUN tlmgr conf tlmgr persistent-downloads 0
+RUN tlmgr option repository ftp://tug.org/historic/systems/texlive/2015/tlnet-final
+RUN tlmgr install inconsolata
+
+RUN  pip install --upgrade pip \
   && pip install Pygments
