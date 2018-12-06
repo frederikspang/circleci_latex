@@ -1,7 +1,7 @@
 FROM buildpack-deps:xenial
 
 LABEL maintainer="frederik@progras.dk"
-LABEL version="0.5"
+LABEL version="0.6"
 
 RUN set -ex \
   \
@@ -22,9 +22,9 @@ RUN set -ex \
     biber \
     texlive-bibtex-extra \
     latexmk \
+    python-dev \
     python-pip \
-  ' \
-  && apt-get update \
+' && apt-get update \
   && apt-get install -y --no-install-recommends $buildDeps \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
@@ -34,5 +34,5 @@ RUN tlmgr conf tlmgr persistent-downloads 0
 RUN tlmgr option repository ftp://tug.org/historic/systems/texlive/2015/tlnet-final
 RUN tlmgr install inconsolata
 
-RUN  pip install --upgrade pip \
+RUN pip install --upgrade pip==9.0.3 \
   && pip install Pygments
