@@ -1,4 +1,4 @@
-FROM buildpack-deps:xenial
+FROM buildpack-deps:disco
 
 LABEL maintainer="frederik@progras.dk"
 LABEL version="0.6"
@@ -16,7 +16,7 @@ RUN set -ex \
     texlive-lang-european \
     texlive-latex-extra \
     texlive-latex-recommended \
-    texlive-math-extra \
+    texlive-science \
     texlive-pictures \
     texlive-science \
     biber \
@@ -29,10 +29,8 @@ RUN set -ex \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
-RUN tlmgr init-usertree; exit 0
-RUN tlmgr conf tlmgr persistent-downloads 0
-RUN tlmgr option repository ftp://tug.org/historic/systems/texlive/2015/tlnet-final
-RUN tlmgr install inconsolata
+# RUN tlmgr init-usertree; exit 0
+# RUN tlmgr conf tlmgr persistent-downloads 0
 
 RUN pip install --upgrade pip==9.0.3 \
   && pip install Pygments
