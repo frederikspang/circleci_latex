@@ -29,8 +29,14 @@ RUN set -ex \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
-# RUN tlmgr init-usertree; exit 0
+WORKDIR /tmp
+COPY aliases.sh /tmp
+SHELL [ "/tmp/aliases.sh" ]
+
+RUN tlmgr init-usertree
 # RUN tlmgr conf tlmgr persistent-downloads 0
+
+RUN tlmgr install inconsolata
 
 RUN pip install --upgrade pip==9.0.3 \
   && pip install Pygments
